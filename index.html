@@ -135,6 +135,82 @@
       font-style: italic;
     }
 
+    /* Success box with penguins */
+    .success-box {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(18px);
+      padding: 50px 40px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.3);
+      z-index: 1000;
+      animation: successIn 0.6s ease;
+    }
+
+    @keyframes successIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .penguins-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin: 30px 0;
+    }
+
+    .penguin {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .penguin-emoji {
+      font-size: 80px;
+      animation: penguin-wave 0.8s ease-in-out infinite;
+    }
+
+    .penguin:nth-child(2) .penguin-emoji {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes penguin-wave {
+      0%, 100% { transform: rotate(0deg); }
+      50% { transform: rotate(8deg); }
+    }
+
+    .penguin-name {
+      font-family: "Playfair Display", serif;
+      font-size: 24px;
+      color: #4a1c2f;
+      font-weight: 600;
+    }
+
+    .success-box h2 {
+      color: #ff4d6d;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .success-box p {
+      color: #666;
+      font-size: 16px;
+      margin-top: 30px;
+    }
+
     /* Floating depth hearts */
     .heart {
       position: absolute;
@@ -177,7 +253,23 @@
       <button id="no">No 🙈</button>
     </div>
 
-    <div class="hint">Some love stories don’t allow “no” ✨</div>
+    <div class="hint">Some love stories don't allow "no" ✨</div>
+  </div>
+
+  <!-- Success box with penguins -->
+  <div class="success-box">
+    <h2>YAY 💕</h2>
+    <div class="penguins-container">
+      <div class="penguin">
+        <div class="penguin-emoji">🐧</div>
+        <div class="penguin-name">Kostas</div>
+      </div>
+      <div class="penguin">
+        <div class="penguin-emoji">🐧</div>
+        <div class="penguin-name">Emily</div>
+      </div>
+    </div>
+    <p>I can't wait for Valentine's Day with you! ❤️</p>
   </div>
 
   <!-- Sounds -->
@@ -188,6 +280,7 @@
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
     const card = document.querySelector(".card");
+    const successBox = document.querySelector(".success-box");
     const hoverSound = document.getElementById("hoverSound");
     const yesSound = document.getElementById("yesSound");
 
@@ -215,7 +308,8 @@
       });
 
       setTimeout(() => {
-        alert("YAY 💕 I can’t wait for Valentine’s Day with you!");
+        card.style.display = "none";
+        successBox.style.display = "block";
       }, 500);
     });
 
